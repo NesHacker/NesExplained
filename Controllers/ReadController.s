@@ -1,7 +1,7 @@
 .proc ReadController
   ; Add some constants to improve readability
   LATCH = $4016
-  CONTROLLER = $4016
+  DATA = $4016
   OUTPUT = $20
 
   ; Initialize the output memory
@@ -16,7 +16,7 @@
   ; Read the buttons in order from the data line
   ; Order: A, B, Select, Start, Up, Down, Left, & Right
 read_loop:
-  lda CONTROLLER
+  lda DATA
   lsr a
   rol OUTPUT
   bcc read_loop
