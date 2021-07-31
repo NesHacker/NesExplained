@@ -1,24 +1,18 @@
 .proc ReadController
-  ; Add some constants to improve readability
-  LATCH = $4016
-  DATA = $4016
-  OUTPUT = $20
-
   ; Initialize the output memory
   lda #1
-  sta OUTPUT
+  sta $20
 
-  ; Send the pulse down the LATCH line to record the buttons
-  sta LATCH
+  ; Send the latch pulse down to the 4021
+  sta $4016
   lda #0
-  sta LATCH
+  sta $4016
 
-  ; Read the buttons in order from the data line
-  ; Order: A, B, Select, Start, Up, Down, Left, & Right
+  ; Read the buttons from the data line
 read_loop:
-  lda DATA
+  lda $4016
   lsr a
-  rol OUTPUT
+  rol $20
   bcc read_loop
 
   rts
